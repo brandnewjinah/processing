@@ -1,72 +1,58 @@
-// let bubble1;
-// let bubble2;
+// let bubbles = [15, 28, 13, 9];
 
 // function setup() {
 //   createCanvas(600, 400);
-//   bubble1 = new Bubble(200, 200, 40, color(255, 234, 0));
-//   bubble2 = new Bubble(400, 200, 20, color(255, 123, 0));
 // }
 
 // function draw() {
 //   background(0);
-//   bubble1.move();
-//   bubble1.show();
-//   bubble1.top();
-//   bubble2.move();
-//   bubble2.show();
-//   bubble2.top();
-// }
-
-// class Bubble {
-//   constructor(x, y, r, c) {
-//     this.x = x;
-//     this.y = y;
-//     this.r = r;
-//     this.c = c;
-//   }
-
-//   move() {
-//     // this.x = this.x + random(-5, 5);
-//     if (this.y === this.r) {
-//       this.y = this.r;
-//     } else {
-//       this.y = this.y - 1;
-//     }
-//   }
-
-//   top() {
-//     //if this.y is at the top, stop moving
-//     if (this.y === this.r) {
-//       this.x = this.x + random(-2, 2);
-//     }
-//   }
-
-//   show() {
-//     noStroke();
-//     fill(this.c);
-//     ellipse(this.x, this.y, this.r * 2);
+//   for (let i = 0; i < bubbles.length; i++) {
+//     ellipse(100 * i + 100, 200, bubbles[i]);
 //   }
 // }
-
-let words = ["hello", "luck", "happy", "sad"];
-let index = 0;
+let bubble = [];
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(600, 400);
+  // for (let i = 0; i < 10; i++) {
+  //   let x = random(width);
+  //   let y = random(height);
+  //   let r = random(10, 50);
+  //   let c = random(0, 255);
+  //   bubble[i] = new Bubble(x, y, r, c);
+  // }
 }
 
 function draw() {
   background(0);
-
-  fill(255);
-  textSize(32);
-  text(words[index], 12, 200);
+  for (let i = 0; i < bubble.length; i++) {
+    bubble[i].show();
+    bubble[i].move();
+  }
 }
 
 function mousePressed() {
-  if (index === words.length - 1) {
-    index = 0;
-  } else {
-    index = index + 1;
+  let r = random(10, 50);
+  let b = new Bubble(mouseX, mouseY, r);
+  bubble.push(b);
+}
+
+class Bubble {
+  constructor(x, y, w, c) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.c = c;
+  }
+
+  show() {
+    noStroke();
+    fill(255, 40);
+    ellipse(this.x, this.y, this.w);
+  }
+
+  move() {
+    this.x = this.x + random(-2, 2);
+    this.y = this.y + random(-5, 5);
   }
 }
